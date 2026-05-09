@@ -29,6 +29,24 @@
 //            ╰─────┴─────┴─────╯            ╰─────┴─────┴─────╯
 	combos {
 		compatible = "zmk,combos";
+		combo_dash {
+		    timeout-ms = <COMBO_DELAY>;
+		    key-positions = <26 27>;  // xc
+		    bindings = <&kp MINUS>; // -
+		    layers = <DEFAULT>;
+		};
+		combo_tab {
+		    timeout-ms = <COMBO_DELAY>;
+		    key-positions = <16 17>;  // xc
+		    bindings = <&kp TAB>; // Tab
+		    layers = <DEFAULT>;
+		};
+		combo_enter {
+		    timeout-ms = <COMBO_DELAY>;
+		    key-positions = <27 28>;  // xc
+		    bindings = <&kp ENTER>; // Enter
+		    layers = <DEFAULT>;
+		};
 		combo_backslash {
 		    timeout-ms = <COMBO_DELAY>;
 		    key-positions = <9 10>; // op
