@@ -13,9 +13,6 @@
 #define COMBO_DELAY 50
 
 / {
-	chosen {
-		zmk,matrix-transform = &five_column_transform;
-	};
 // Combomap
 //
 // ╭───────┬───────┬─────┬─────┬─────┬─────╮      ╭─────┬─────┬─────┬─────┬───────┬───────╮
