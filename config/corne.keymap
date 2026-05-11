@@ -3,7 +3,10 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/mouse.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/pointing.h>
 
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 1500  // default: 600
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 20    // default: 10
 #define DEFAULT 0
 #define NUMBERS 1
 #define SYMBOLS 2
@@ -29,6 +32,18 @@
 //            ╰─────┴─────┴─────╯            ╰─────┴─────┴─────╯
 	combos {
 		compatible = "zmk,combos";
+		combo_right_mouse_button {
+		    timeout-ms = <COMBO_DELAY>;
+		    key-positions = <16 28>;  // fv
+		    bindings = <&kp MINUS>; // Right Mouse Button
+		    layers = <DEFAULT>;
+		};
+		combo_left_mouse_button {
+		    timeout-ms = <COMBO_DELAY>;
+		    key-positions = <17 29>;  // gb
+		    bindings = <&kp MINUS>; // Left Mouse Button
+		    layers = <DEFAULT>;
+		};
 		combo_dash {
 		    timeout-ms = <COMBO_DELAY>;
 		    key-positions = <26 27>;  // xc
@@ -37,19 +52,19 @@
 		};
 		combo_tab {
 		    timeout-ms = <COMBO_DELAY>;
-		    key-positions = <16 17>;  // xc
+		    key-positions = <16 17>;  // df
 		    bindings = <&kp TAB>; // Tab
 		    layers = <DEFAULT>;
 		};
 		combo_enter {
 		    timeout-ms = <COMBO_DELAY>;
-		    key-positions = <27 28>;  // xc
+		    key-positions = <27 28>;  // cv
 		    bindings = <&kp ENTER>; // Enter
 		    layers = <DEFAULT>;
 		};
 		combo_backslash {
 		    timeout-ms = <COMBO_DELAY>;
-		    key-positions = <9 10>; // op
+		    key-positions = <9 10>; // io
 		    bindings = <&kp BSLH>; // BackSlash
 		    layers = <DEFAULT>;
 		};
@@ -102,19 +117,19 @@
 // ---------------------------------------------------------------------------------------------------------------------------------------------
                 default_layer {
                         bindings = <
-// ╭───────┬────────────┬─────┬─────┬─────┬─────╮               ╭─────┬─────┬─────────┬───────┬───────────────┬───────╮
-// │   0   │      1     │  2  │  3  │  4  │  5  │               │  6  │  7  │    8    │  9    │       10      │  11   │
-// │       │      Q     │  W  │  E  │  R  │  T  │               │  Y  │  U  │    I    │  O    │       P       │       │
-    &none      &kp Q     &kp W &kp E &kp R &kp T                 &kp Y &kp U   &kp I   &kp O       &kp P       &none
-// ├───────┼────────────┼─────┼─────┼─────┼─────┤               ├─────┼─────┼─────────┼───────┼───────────────┼───────┤
-// │  12   │     13     │  14 │  15 │  16 │  17 │               │  18 │  19 │   20    │  21   │      22       │  23   │
-// │       │   CTRL A   │  S  │  D  │  F  │  G  │               │  H  │  J  │    K    │  L    │    CTRL ;     │       │
-    &none   &mt LCTRL A  &kp S &kp D &kp F &kp G                 &kp H &kp J   &kp K    &kp L   &mt LCTRL SEMI &none     
-// ├───────┼────────────┼─────┼─────┼─────┼─────┤               ├─────┼─────┼─────────┼───────┼───────────────┼───────┤
-// │  24   │    25      │  26 │  27 │  28 │  29 │               │  30 │  31 │   32    │  33   │      34       │  35   │
-// │       │   SHFT Z   │  X  │  C  │  V  │  B  │               │  N  │  M  │    ,    │  .    │    SHFT /     │       │
-    &none   &mt LSHIFT Z &kp X &kp C &kp V &kp B                 &kp N &kp M &kp COMMA &kp DOT &mt LSHIFT FSLH &none
-// ╰───────┴────────────┴─────┴─────┴─────┴─────╯               ╰─────┴─────┴─────────┴───────┴───────────────┴───────╯
+//    ╭─────────┬──────┬─────┬─────┬─────┬─────╮                 ╭─────┬─────┬─────────┬───────┬─────────┬─────────╮
+//    │   0     │  1   │  2  │  3  │  4  │  5  │                 │  6  │  7  │    8    │  9    │  10     │    11   │
+//    │  ESC    │  Q   │  W  │  E  │  R  │  T  │                 │  Y  │  U  │    I    │  O    │   P     │BackSpace│
+       &kp ESC   &kp Q  &kp W &kp E &kp R &kp T                   &kp Y &kp U   &kp I   &kp O   &kp P     &kp BSPC
+//    ├─────────┼──────┼─────┼─────┼─────┼─────┤                 ├─────┼─────┼─────────┼───────┼─────────┼─────────┤
+//    │  12     │  13  │  14 │  15 │  16 │  17 │                 │  18 │  19 │   20    │  21   │  22     │   23    │
+//    │ CTRL    │   A  │  S  │  D  │  F  │  G  │                 │  H  │  J  │    K    │  L    │   ;     │  HOME   │
+       &kp LCTRL &kp A  &kp S &kp D &kp F &kp G                   &kp H &kp J   &kp K    &kp L  &kp SEMI  &kp HOME
+//    ├─────────┼──────┼─────┼─────┼─────┼─────┤                 ├─────┼─────┼─────────┼───────┼─────────┼─────────┤
+//    │  24     │  25  │  26 │  27 │  28 │  29 │                 │  30 │  31 │   32    │  33   │  34     │   35    │
+//    │  ALT    │   Z  │  X  │  C  │  V  │  B  │                 │  N  │  M  │    ,    │  .    │   /     │  END    │
+       &kp LALT  &kp Z  &kp X &kp C &kp V &kp B                   &kp N &kp M &kp COMMA &kp DOT &kp FSLH  &kp END
+//    ╰─────────┴──────┴─────┴─────┴─────┴─────╯                 ╰─────┴─────┴─────────┴───────┴─────────┴─────────╯
 //         ╭───────────┬────────────┬─────────────────╮   ╭─────────────────┬──────────┬─────────╮
 //         │    36     │    37      │      38         │   │      38         │    39    │  40     │
 //         │   META    │ ENT ALT    │   SPC SPE       │   │    SPC NUM      │ SHFT     │ TAB     │
@@ -125,19 +140,19 @@
 // ---------------------------------------------------------------------------------------------------------------------------------------------
                 number_layer {
                         bindings = <
-// ╭───────┬───────┬──────┬──────┬──────┬──────╮               ╭──────────┬──────────┬────────┬───────────┬────────────┬───────╮
-// │   0   │   1   │  2   │  3   │  4   │  5   │               │   6      │  7       │  8     │    9      │   10       │  11   │
-// │       │   1   │  2   │  3   │  4   │  5   │               │   6      │  7       │  8     │    9      │   0        │       │
-    &none    &kp N1 &kp N2 &kp N3 &kp N4 &kp N5                 &kp N6     &kp N7     &kp N8    &kp N9     &kp N0       &none
-// ├───────┼───────┼──────┼──────┼──────┼──────┤               ├──────────┼──────────┼────────┼───────────┼────────────┼───────┤
-// │  12   │  13   │  14  │  15  │  16  │  17  │               │  18      │  19      │   20   │     21    │   22       │  23   │
-// │       │  F1   │  F2  │  F3  │  F4  │  F5  │               │ LEFT     │ DOWN     │  UP    │    RIGHT  │ Vol Up     │       │
-    &none   &kp F1  &kp F2 &kp F3 &kp F4 &kp F5                 &kp LEFT   &kp DOWN   &kp UP   &kp RIGHT   &kp C_VOL_UP &none
-// ├───────┼───────┼──────┼──────┼──────┼──────┤               ├──────────┼──────────┼────────┼───────────┼────────────┼───────┤
-// │  24   │    25 │  26  │  27  │  28  │  29  │               │  30      │  31      │   32   │  33       │      34    │  35   │
-// │       │  F6   │  F7  │  F8  │  F9  │  F10 │               │Mouse Left│Mouse Down│Mouse Up│Mouse Right│  Vol Down  │       │
-    &none   &kp F6  &kp F7 &kp F8 &kp F9 &kp F10                 &trans     &trans     &trans    &trans    &kp C_VOL_DN &none
-// ╰───────┴───────┴──────┴──────┴──────┴──────╯               ╰──────────┴──────────┴────────┴───────────┴────────────┴───────╯
+// ╭───────┬───────┬──────┬──────┬──────┬──────╮               ╭───────────────┬───────────────┬─────────────┬────────────────┬────────────┬───────╮
+// │   0   │   1   │  2   │  3   │  4   │  5   │               │       6       │      7        │      8      │      9         │     10     │  11   │
+// │       │   1   │  2   │  3   │  4   │  5   │               │       6       │      7        │      8      │      9         │     0      │       │
+    &none    &kp N1 &kp N2 &kp N3 &kp N4 &kp N5                     &kp N6          &kp N7          &kp N8        &kp N9       &kp N0       &none
+// ├───────┼───────┼──────┼──────┼──────┼──────┤               ├───────────────┼───────────────┼─────────────┼────────────────┼────────────┼───────┤
+// │  12   │  13   │  14  │  15  │  16  │  17  │               │      18       │      19       │    20       │     21         │    22      │  23   │
+// │       │  F1   │  F2  │  F3  │  F4  │  F5  │               │     LEFT      │     DOWN      │    UP       │    RIGHT       │  Vol Up    │       │
+    &none   &kp F1  &kp F2 &kp F3 &kp F4 &kp F5                    &kp LEFT        &kp DOWN       &kp UP        &kp RIGHT      &kp C_VOL_UP &none
+// ├───────┼───────┼──────┼──────┼──────┼──────┤               ├───────────────┼───────────────┼─────────────┼────────────────┼────────────┼───────┤
+// │  24   │    25 │  26  │  27  │  28  │  29  │               │      30       │      31       │   32        │      33        │     34     │  35   │
+// │       │  F6   │  F7  │  F8  │  F9  │  F10 │               │  Mouse Left   │  Mouse Down   │  Mouse Up   │  Mouse Right   │  Vol Down  │       │
+    &none   &kp F6  &kp F7 &kp F8 &kp F9 &kp F10                &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &kp C_VOL_DN &none
+// ╰───────┴───────┴──────┴──────┴──────┴──────╯               ╰───────────────┴───────────────┴─────────────┴────────────────┴────────────┴───────╯
 //         ╭───────────┬─────────┬─────────────────╮      ╭─────────────────┬────────────┬─────────────────────╮
 //         │    36     │    37   │      38         │      │      38         │    39      │     40              │
 //         │    F11    │   F12   │      SPC SPE    │      │ SPC NUM         │ Play/Pause │                     │
